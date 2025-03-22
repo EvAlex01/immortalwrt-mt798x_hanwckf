@@ -16,10 +16,10 @@
 	};
 	
 	aliases {
-		led-boot = &led_status_red;
-		led-failsafe = &led_status_red;
-		led-running = &led_status_blue;
-		led-upgrade = &led_status_blue;
+		led-boot = &led_power;
+ 		led-failsafe = &led_power;
+ 		led-running = &led_power;
+ 		led-upgrade = &led_power;
 	};
 	
 	memory {
@@ -44,14 +44,24 @@
 	
 	leds {
 		compatible = "gpio-leds";
-		
-		led_status_red: status_red {
-			label = "red:status";
+
+		led_power: power {
+			label = "blue:power";
 			gpios = <&pio 29 GPIO_ACTIVE_LOW>;
 		};
-		
-		led_status_blue: status_blue {
-			label = "blue:status";
+
+		usb {
+			label = "blue:usb";
+			gpios = <&pio 30 GPIO_ACTIVE_LOW>;
+		};
+
+		wps {
+			label = "blue:wps";
+			gpios = <&pio 31 GPIO_ACTIVE_LOW>;
+		};
+
+		wan {
+			label = "blue:wan";
 			gpios = <&pio 32 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -159,13 +169,11 @@
 	phy5: phy@5 {
 		compatible = "ethernet-phy-id67c9.de0a";
 		reg = <5>;
-		mxl,led-config = <0x0 0x0 0x0 0x3f0>;
 	};
 	
 	phy6: phy@6 {
 		compatible = "ethernet-phy-id67c9.de0a";
 		reg = <6>;
-		mxl,led-config = <0x0 0x0 0x0 0x3f0>;
 	};
 	
 	switch: switch@0 {
